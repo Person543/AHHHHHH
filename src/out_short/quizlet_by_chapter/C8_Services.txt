@@ -1,0 +1,5 @@
+What is a Windows service?  (A) A driver only  (B) A program you double-click  (C) A scheduled task  (D) A program built to run in the background without a user launching it	A program built to run in the background without a user launching it  [8.3.]
+How does a service get controlled?	The service talks to a service control program, and you send your commands to that control program.
+Tools that manage services?	GUI tools (services.msc), sc, net, PsService (Sysinternals), and PowerShell.  [Hook: GUI, sc, net, PsService, PowerShell.]
+Service start types and accounts?	Automatic, Manual, Disabled. Accounts: LocalSystem (most power), NetworkService, LocalService.
+Two service misconfigs attackers abuse?	Unquoted paths with spaces, and weak permissions letting you swap the binary or repoint it.  [Services are defined under HKLM\SYSTEM\CurrentControlSet\Services.]

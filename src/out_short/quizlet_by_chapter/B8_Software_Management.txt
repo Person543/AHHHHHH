@@ -1,0 +1,4 @@
+Which mapping is right?  (A) apt = SUSE, zypper = Ubuntu  (B) Everything uses apt  (C) yum = Ubuntu, apt = Rocky  (D) apt = Debian/Ubuntu/Mint, dnf & yum = Red Hat/Rocky/CentOS, zypper = SUSE	apt = Debian/Ubuntu/Mint, dnf & yum = Red Hat/Rocky/CentOS, zypper = SUSE  [8.7's four package managers.]
+Where does software come from, and what must admins check?	Repositories - and that they're valid (signed with trusted GPG keys).  [A fake repo = a supply-chain hack.]
+What are Snap and Flatpak?	Ways to ship a program with its dependencies bundled in.  [Downside: the bundle's libraries get patched by its publisher, not your distro.]
+What can admins verify about installed software?	Its hashes - rpm -V, debsums, sha256sum.

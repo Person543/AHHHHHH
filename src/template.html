@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Ops Quiz Trainer</title><style>
+:root{--bg:#0f1115;--card:#171a21;--line:#262b36;--fg:#e8eaf0;--mut:#9aa3b2;--acc:#4f9cff;--ok:#2fbf71;--bad:#ff5c6c}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+header{position:sticky;top:0;background:#12141a;border-bottom:1px solid var(--line);padding:10px 16px;z-index:5}
+h1{font-size:17px;margin:0 0 8px}nav{display:flex;gap:6px;flex-wrap:wrap}
+button{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--acc)}button.on{background:var(--acc);border-color:var(--acc);color:#07101f;font-weight:600}
+main{max-width:860px;margin:0 auto;padding:18px 16px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.q{font-size:19px;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;margin:7px 0;padding:11px 13px}
+.opt.correct{background:rgba(47,191,113,.18);border-color:var(--ok)}.opt.wrong{background:rgba(255,92,108,.16);border-color:var(--bad)}
+.exp{color:var(--mut);font-size:14px;border-left:3px solid var(--acc);padding-left:10px;margin-top:12px;white-space:pre-wrap}
+.ans{background:#10131a;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;white-space:pre-wrap}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sp{flex:1}
+.pill{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+.bar{height:7px;background:#20242e;border-radius:99px;overflow:hidden;margin:10px 0}.bar>i{display:block;height:100%;background:var(--acc)}
+table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;font-size:14px}
+label.dk{display:flex;gap:8px;align-items:flex-start;padding:7px;border-bottom:1px solid var(--line);font-size:14px}
+textarea{width:100%;min-height:90px;background:#10131a;color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit}
+.small{font-size:13px;color:var(--mut)}.big{font-size:28px;font-weight:700}
+</style></head><body>
+<header><h1>Cyber Ops Quiz Trainer <span class="pill" id="count"></span></h1>
+<nav><button data-v="study" class="on">Study</button><button data-v="decks">Pick chapters</button><button data-v="plan">20-day plan</button><button data-v="browse">Browse all</button></nav></header>
+<main id="app"></main>
+<script>
+const DECKS=/*DATA*/null, PLAN=/*PLAN*/null;
+const ALL=[];DECKS.forEach(d=>d.questions.forEach((q,i)=>ALL.push(Object.assign({deck:d.code,dname:d.name,book:d.book,id:d.code+'-'+i},q))));
+document.getElementById('count').textContent=ALL.length+' questions / '+DECKS.length+' chapters';
+const S=JSON.parse(localStorage.getItem('cyberquiz')||'{}');
+S.sel=S.sel||DECKS.map(d=>d.code); S.stats=S.stats||{}; S.plan=S.plan||{}; S.mode=S.mode||'quiz';
+const save=()=>localStorage.setItem('cyberquiz',JSON.stringify(S));
+let view='study',pool=[],idx=0,done=0,right=0,shown=false;
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function build(){pool=ALL.filter(q=>S.sel.includes(q.deck)&&(S.mode!=='write'||q.type==='sa'));
+ if(S.order!=='seq')pool.sort(()=>Math.random()-.5); idx=0;done=0;right=0;shown=false;}
+function go(v){view=v;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));render();}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+function render(){const a=document.getElementById('app');
+ if(view==='decks'){a.innerHTML='<div class="card"><div class="row"><b>Chapters in play</b><span class="sp"></span><button id=all>All</button><button id=none>None</button></div>'+
+  DECKS.map(d=>{const n=ALL.filter(q=>q.deck===d.code).length;const st=S.stats[d.code]||{s:0,n:0};
+  return `<label class="dk"><input type=checkbox data-c="${d.code}" ${S.sel.includes(d.code)?'checked':''}><span><b>${d.code}</b> ${esc(d.name)}<br><span class=small>${d.book} &middot; ${n} questions &middot; lifetime ${st.n?Math.round(100*st.s/st.n)+'% of '+st.n+' answered':'not started'}</span></span></label>`}).join('')+'</div>';
+  a.querySelectorAll('input').forEach(i=>i.onchange=()=>{S.sel=[...a.querySelectorAll('input:checked')].map(x=>x.dataset.c);save();build();});
+  all.onclick=()=>{S.sel=DECKS.map(d=>d.code);save();build();render();};none.onclick=()=>{S.sel=[];save();build();render();};return;}
+ if(view==='plan'){a.innerHTML='<div class="card"><b>20-day plan</b><div class=small>Tick a day to load exactly those chapters into Study. ~45-60 min/day. Review days are quiz-only.</div></div>'+
+  PLAN.map((p,i)=>`<div class="card"><div class=row><input type=checkbox data-d="${i}" ${S.plan[i]?'checked':''}><b>${p[0]}</b><span class=sp></span><button data-load="${p[2]}">Load these chapters</button></div>
+  <div style="margin-top:6px">${esc(p[1])}</div><div class=small>${esc(p[2])}${p[3]?' &mdash; '+esc(p[3]):''}</div></div>`).join('');
+  a.querySelectorAll('input').forEach(i=>i.onchange=()=>{S.plan[i.dataset.d]=i.checked;save();});
+  a.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{const v=b.dataset.load;S.sel=v==='ALL'?DECKS.map(d=>d.code):v.split(',');save();build();go('study');});return;}
+ if(view==='browse'){a.innerHTML='<div class=card><input id=f placeholder="Search questions and answers..." style="width:100%;padding:10px;border-radius:9px;border:1px solid var(--line);background:#10131a;color:var(--fg)"></div><div id=res></div>';
+  const draw=t=>{const r=ALL.filter(q=>!t||(q.q+' '+(q.answer||'')+' '+(q.options||[]).join(' ')+q.exp).toLowerCase().includes(t));
+   document.getElementById('res').innerHTML=r.map(q=>`<div class=card><span class=pill>${q.deck}</span><div class=q style="margin-top:8px">${esc(q.q)}</div><div class=ans>${esc(q.type==='mc'?q.options[q.answer]:q.answer)}</div><div class=exp>${esc(q.exp)}</div></div>`).join('')||'<div class=card>No match.</div>';};
+  draw('');document.getElementById('f').oninput=e=>draw(e.target.value.toLowerCase());return;}
+ // study
+ if(!pool.length)build();
+ const q=pool[idx];
+ let h=`<div class=card><div class=row>
+  <button data-m="quiz" class="${S.mode==='quiz'?'on':''}">Quiz (multiple choice + written)</button>
+  <button data-m="cards" class="${S.mode==='cards'?'on':''}">Flashcards</button>
+  <button data-m="write" class="${S.mode==='write'?'on':''}">Written only</button>
+  <span class=sp></span><button id=re>Reshuffle</button></div>
+  <div class=bar><i style="width:${pool.length?100*idx/pool.length:0}%"></i></div>
+  <div class=small>${idx+1} of ${pool.length} &middot; session score ${done?Math.round(100*right/done)+'%':'-'} (${right}/${done})</div></div>`;
+ if(!q){a.innerHTML=h+'<div class=card>No questions selected. Go to "Pick chapters".</div>';wire();return;}
+ h+=`<div class=card><span class=pill>${q.deck} &middot; ${esc(q.dname)}</span><div class=q style="margin-top:10px">${esc(q.q)}</div>`;
+ if(q.type==='mc'&&S.mode==='quiz'){h+=q.options.map((o,i)=>`<button class="opt${shown?(i===q.answer?' correct':(i===shown.pick?' wrong':'')):''}" data-o="${i}">${esc(o)}</button>`).join('');}
+ else{h+=`<textarea id=ta placeholder="Say or type your answer from memory, then reveal."></textarea>`;
+  if(shown)h+=`<div class=ans><b>Model answer:</b>\n${esc(q.type==='mc'?q.options[q.answer]:q.answer)}</div><div class=row style="margin-top:10px"><button id=gotit>I had it</button><button id=missed>I missed it</button></div>`;
+  else h+=`<div class=row style="margin-top:10px"><button id=rev>Reveal answer</button></div>`;}
+ if(shown&&q.exp)h+=`<div class=exp>${esc(q.exp)}</div>`;
+ if(shown)h+=`<div class=row style="margin-top:12px"><button id=next>Next &rarr;</button></div>`;
+ h+='</div>';a.innerHTML=h;wire();}
+function score(ok,q){done++;if(ok)right++;const st=S.stats[q.deck]||{s:0,n:0};st.n++;if(ok)st.s++;S.stats[q.deck]=st;save();}
+function wire(){const a=document.getElementById('app');
+ a.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{S.mode=b.dataset.m;save();build();render();});
+ const re=document.getElementById('re');if(re)re.onclick=()=>{build();render();};
+ a.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{if(shown)return;const q=pool[idx];const p=+b.dataset.o;shown={pick:p};score(p===q.answer,q);render();});
+ const rev=document.getElementById('rev');if(rev)rev.onclick=()=>{shown={};render();};
+ const g=document.getElementById('gotit');if(g)g.onclick=()=>{score(true,pool[idx]);nxt();};
+ const m=document.getElementById('missed');if(m)m.onclick=()=>{score(false,pool[idx]);pool.push(pool[idx]);nxt();};
+ const n=document.getElementById('next');if(n)n.onclick=nxt;}
+function nxt(){idx=(idx+1)%pool.length;shown=false;render();}
+build();render();
+</script></body></html>

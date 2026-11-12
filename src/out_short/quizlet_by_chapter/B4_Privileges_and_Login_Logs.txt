@@ -1,0 +1,5 @@
+Which definition is wrong?  (A) Polkit = command-line only, no GUI role  (B) sudo = run a command as someone else, set up by admins  (C) su = become another user  (D) runuser = admin runs a command as another user	Polkit = command-line only, no GUI role  [Polkit is the one used in GRAPHICAL environments.]
+The 3 login record systems?	utmp (login & ssh), lastlog (PAM), systemd.  [Hook: U-L-S.]
+Which tool reads which?	utmp: who, w, last. lastlog file: lastlog. systemd: loginctl.  [last reads wtmp history, lastb reads btmp failed logins.]
+Why does having 3 records help defenders?	Different programs write them, so wiping one still leaves the login in the others.
+Where is sudo configured, and what edits it?	/etc/sudoers, edited with visudo (it checks your syntax first).  [sudo -l shows what you can run.]

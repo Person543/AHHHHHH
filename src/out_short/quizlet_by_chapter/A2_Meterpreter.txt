@@ -1,0 +1,4 @@
+Meterpreter migration goes which way?  (A) From low up to SYSTEM  (B) Only sideways, same user  (C) It cannot migrate  (D) From a higher privileged process down to lower privileged ones	From a higher privileged process down to lower privileged ones  [2.4: high -> low. What it can see depends on the privileges of the process it sits in.]
+4 things Meterpreter lets you do?	Recon the system, recon the network, mess with files, run code, change the registry.  [Hook: Look, Look, Take, Run, Edit.]
+Where does Meterpreter live?	Inside a running process, in memory - not a file on disk. That's why file scanning misses it.  [migrate <PID> moves it.]
+3 ways Meterpreter gets extended?	Run PowerShell or Python on the target, read the clipboard, use ADSI to scope out the domain.  [Hook: Script, Steal, Snoop.]

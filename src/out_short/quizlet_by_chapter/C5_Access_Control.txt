@@ -1,0 +1,6 @@
+What are the 4 parts of a security descriptor?  (A) Owner, group, world, other  (B) User, role, type, level  (C) Read, write, execute, deny  (D) Owner SID + primary group, DACL, SACL, flags	Owner SID + primary group, DACL, SACL, flags  [5.10. Hook: Only Good Dogs Sit First - Owner, Group, DACL, SACL, Flags.]
+DACL vs SACL?	DACL = who gets in (access). SACL = what gets logged (auditing).  [Hook: Door vs Security camera.]
+Which objects have a security descriptor?	Securable objects: files, directories, registry items, processes.
+Tools for viewing and setting permissions?	PowerShell (Get-Acl/Set-Acl) and icacls. Sysinternals AccessChk and AccessEnum to look around. File Explorer works but its interface has subtle issues.  [SDDL = permissions written as a string.]
+Windows protects some files even from SYSTEM. Who can still change them, and what attack uses that?	Admins, or anyone with SeTakeOwnershipPrivilege or SeRestorePrivilege - they take ownership first. That's the Sticky Keys attack.  [Replace sethc.exe with cmd.exe, hit Shift 5 times at the lock screen = SYSTEM shell.]
+What defends against that?	Windows Resource Protection.

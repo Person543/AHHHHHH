@@ -1,0 +1,5 @@
+Why do attackers rename their process?  (A) To use less memory  (B) Renaming raises privileges  (C) systemd requires it  (D) Because defenders hunt by name - but /proc/<pid>/exe still shows the real file	Because defenders hunt by name - but /proc/<pid>/exe still shows the real file  [5.6 plus the fix.]
+5 process tools?	ps, pidof, pgrep, pstree, top.  [Hook: Please Pick Pretty Process Trees.]
+How do you talk to a running process?	Send it a signal.  [SIGTERM 15 = polite, can be caught. SIGKILL 9 = instant, can't be caught.]
+What's in /proc?	A folder per running process with its details - cmdline, exe, environ, fd.
+Who manages Linux startup, and who else uses it?	systemd (PID 1). Admins run services with it; attackers plant their own unit or timer for persistence.  [systemctl enable/start/status, journalctl -u.]

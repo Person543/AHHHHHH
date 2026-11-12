@@ -1,0 +1,6 @@
+Why do attackers ship payloads inside .iso or .vhd files?  (A) Windows auto-trusts them  (B) Those containers avoid the Mark of the Web, and marked files get extra scrutiny  (C) They can't be scanned  (D) They download faster	Those containers avoid the Mark of the Web, and marked files get extra scrutiny  [Ch4. MOTW is how Windows tracks internet downloads.]
+What is the Mark of the Web stored in?	An NTFS alternate data stream - one file holding more than one stream.  [Copy to FAT32 and the mark is gone.]
+Two ways to name a Windows file?	The full case-insensitive name, or the old 8.3 short name (PROGRA~1).  [Files also carry attributes (hidden, read only) and several timestamps.]
+Hard link vs junction vs symlink in Windows?	Hard link = between files. Junction = between directories. Symlink = admin-made, can point at relative or network paths.  [Shortcuts (.lnk) are just files that point somewhere.]
+Two special Windows file locations?	The hidden desktop.ini in each folder, and C:\Users\Public.
+What manages Windows files?	File Explorer, command-line tools and PowerShell.

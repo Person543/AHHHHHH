@@ -1,0 +1,7 @@
+Where are Windows password hashes, and in what format?  (A) Plaintext in the registry  (B) NTLM hashes in the local SAM and in ntds.dit on domain controllers  (C) SHA-512 in /etc/shadow  (D) bcrypt in HKCU	NTLM hashes in the local SAM and in ntds.dit on domain controllers  [3.6. They're protected - even SYSTEM can't read them directly.]
+You log on to Windows - what do you get?	A login ID and one or more access tokens.  [Logon types: 2 interactive, 3 network, 10 RDP.]
+What does UAC do, and what controls it?	Lets you use a privileged token when you need it. Controlled by registry policies, set by group policy or local security policy.
+Hashes are protected from SYSTEM - so how do attackers get them?	Windows tools run from an Administrator or Backup Operator account.  [Backup Operators can read protected files, which is why it's basically an admin group.]
+Two things to do with a stolen hash?	Crack it (John the Ripper) or pass-the-hash - use the hash itself instead of the password.
+Privileges and rights - what are they for?	Fine-grained control over what a user can do.  [whoami /priv lists yours.]
+Finding who's logged on - what's the catch?	There are several ways (query user, psloggedon, WMI, event 4624) but every one of them has limitations.

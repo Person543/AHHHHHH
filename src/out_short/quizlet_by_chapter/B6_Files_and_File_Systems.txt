@@ -1,0 +1,7 @@
+Which is FALSE?  (A) Deleting the original always breaks a hard link  (B) A symlink just stores a path, so it breaks if the target goes away  (C) Files map to inodes on devices  (D) A hard link is a second name for the same inode	Deleting the original always breaks a hard link  [Hard links keep the data alive - only the link count drops. Symlinks are the fragile ones.]
+Hard link vs symlink?	Hard = same inode, same file system, files only. Soft = a path, can cross file systems and point at folders.
+SUID, SGID, sticky bit?	SUID = runs as the file's owner. SGID = runs as the group. Sticky = in a shared folder, only the owner can delete their file (/tmp).  [find / -perm -4000 hunts SUID.]
+Basic permissions and the extras?	rwx for user, group, world. Extras: immutable (chattr +i) and ACLs (getfacl/setfacl).
+What does lsof show?	Open files and network sockets.
+Lost the root password - how does mounting save you?	Boot rescue media, mount the disk, chroot in, reset the password. Same trick reads a Windows disk.
+Why does the standard directory layout matter?	Every distro puts things in the same place: /etc config, /var logs, /home users, /usr software, /proc processes.

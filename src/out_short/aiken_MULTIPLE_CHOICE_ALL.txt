@@ -1,0 +1,161 @@
+Which one is FALSE?
+A. Attackers skip misconfigurations and only chase CVEs
+B. Kill Chain and MITRE ATT&CK give attacks a structure
+C. Labs are built with virtualization so you get hands-on time
+D. CVE names the bug, CVSS scores how bad it is
+ANSWER: A
+
+Meterpreter migration goes which way?
+A. From low up to SYSTEM
+B. Only sideways, same user
+C. It cannot migrate
+D. From a higher privileged process down to lower privileged ones
+ANSWER: D
+
+The 7 module types?
+A. exploit, scanner, trojan, rootkit, nop
+B. exploit, payload, auxiliary, post, encoders, evasion, nop
+C. recon, exploit, post, report
+D. payload, listener, dropper, loader, shell
+ANSWER: B
+
+Which is FALSE?
+A. Linux is faster to brute force than Windows, and SSH beats SMB
+B. Metasploit brute forces SMB and SSH
+C. The 4 features are userlist, wordlist, time, defenses
+D. Kali ships password lists and you can build your own
+ANSWER: A
+
+Which is FALSE?
+A. Web delivery scripts let you build custom phishing
+B. Phishing is a common first way in
+C. Modules build phishing docs for Microsoft Office, LibreOffice and OpenOffice
+D. Microsoft's mitigations can't be beaten, so Office phishing is dead
+ANSWER: D
+
+Which is FALSE?
+A. It can spit out source code you compile yourself
+B. Encoding the payload reliably beats modern antivirus
+C. msfvenom makes stand-alone malware in many formats
+D. It can hide malware in a real Windows program and keep that program working
+ANSWER: B
+
+Tamper protection is ON. What can an admin still do?
+A. Nothing, every setting is locked
+B. Only empty quarantine
+C. Disable Defender in the registry, still supported
+D. Add exclusions - and excluded stuff is never scanned
+ANSWER: D
+
+Which is FALSE?
+A. Bash can't use the network, so attackers ignore it
+B. You reach Linux through terminals and pseudoterminals running shells
+C. Bash keeps state in options, variables and environment variables
+D. A shell acts differently based on how it's configured and started
+ANSWER: A
+
+Which tool pairing is right?
+A. adduser is low level, useradd is a Perl script
+B. usermod creates users
+C. useradd/userdel = low level; adduser/deluser = Perl scripts on Mint & Ubuntu; usermod = change a user
+D. They're all the same command
+ANSWER: C
+
+Which is FALSE?
+A. You can hash a password you already know and compare
+B. John reverses the hash to get the password back
+C. John the Ripper guesses over and over
+D. Hashes for local users sit in /etc/shadow
+ANSWER: B
+
+Which definition is wrong?
+A. Polkit = command-line only, no GUI role
+B. sudo = run a command as someone else, set up by admins
+C. su = become another user
+D. runuser = admin runs a command as another user
+ANSWER: A
+
+Why do attackers rename their process?
+A. To use less memory
+B. Renaming raises privileges
+C. systemd requires it
+D. Because defenders hunt by name - but /proc/<pid>/exe still shows the real file
+ANSWER: D
+
+Which is FALSE?
+A. Deleting the original always breaks a hard link
+B. A symlink just stores a path, so it breaks if the target goes away
+C. Files map to inodes on devices
+D. A hard link is a second name for the same inode
+ANSWER: A
+
+Which comparison is right?
+A. Both always run together
+B. SELinux only logs, never blocks
+C. SELinux = labels on everything, deny by default, tuned with Booleans. AppArmor = one profile per important program. Usually only one is on
+D. AppArmor uses the 4-part context
+ANSWER: C
+
+Which mapping is right?
+A. apt = SUSE, zypper = Ubuntu
+B. Everything uses apt
+C. yum = Ubuntu, apt = Rocky
+D. apt = Debian/Ubuntu/Mint, dnf & yum = Red Hat/Rocky/CentOS, zypper = SUSE
+ANSWER: D
+
+Which is FALSE?
+A. cmd runs commands stored in the registry when it starts
+B. cmd records its history
+C. PowerShell is the modern, extendable shell and now runs on Linux too
+D. Batch and VBScript are gone from Windows
+ANSWER: D
+
+Which is FALSE?
+A. Every user and group has a SID; some well-known SIDs are the same everywhere
+B. A domain group and a local group with the same name are the same group
+C. Local account data lives in the SAM; domain account data lives in Active Directory
+D. Users and groups control access, rights and privileges
+ANSWER: B
+
+Where are Windows password hashes, and in what format?
+A. Plaintext in the registry
+B. NTLM hashes in the local SAM and in ntds.dit on domain controllers
+C. SHA-512 in /etc/shadow
+D. bcrypt in HKCU
+ANSWER: B
+
+Why do attackers ship payloads inside .iso or .vhd files?
+A. Windows auto-trusts them
+B. Those containers avoid the Mark of the Web, and marked files get extra scrutiny
+C. They can't be scanned
+D. They download faster
+ANSWER: B
+
+What are the 4 parts of a security descriptor?
+A. Owner, group, world, other
+B. User, role, type, level
+C. Read, write, execute, deny
+D. Owner SID + primary group, DACL, SACL, flags
+ANSWER: D
+
+Which is FALSE?
+A. The registry is keys, subkeys and values holding data
+B. Some keys are volatile and built while the system runs
+C. Most keys live in hive files on disk
+D. Registry keys have no permissions
+ANSWER: D
+
+Defenders check the parent process. What do attackers do?
+A. Rename the kernel
+B. Obfuscate (spoof) their parent so they look like a child of something normal
+C. Nothing - parents can't be faked
+D. Delete the process list
+ANSWER: B
+
+What is a Windows service?
+A. A driver only
+B. A program you double-click
+C. A scheduled task
+D. A program built to run in the background without a user launching it
+ANSWER: D
+

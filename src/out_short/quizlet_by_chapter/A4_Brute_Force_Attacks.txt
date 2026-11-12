@@ -1,0 +1,6 @@
+Which is FALSE?  (A) Linux is faster to brute force than Windows, and SSH beats SMB  (B) Metasploit brute forces SMB and SSH  (C) The 4 features are userlist, wordlist, time, defenses  (D) Kali ships password lists and you can build your own	Linux is faster to brute force than Windows, and SSH beats SMB  [It's the reverse: Windows is faster than Linux, SMB is faster than SSH. Hook: Windows Wins, SMB is Speedy.]
+4 features of a brute force attack?	Userlist, wordlist, time it takes, defenses in the way.  [Hook: Users Want Time Delays.]
+Shells on a Linux target?	You can get a plain Linux shell or Meterpreter. Upgrade the plain one with sessions -u.
+2 non-Metasploit brute force tools?	NetExec and CrackMapExec. You can also write your own.
+Where do wordlists come from?	Kali's built-in lists (rockyou.txt) or ones you generate yourself (crunch, cewl).
+What stops a brute force attack?	Lockout, rate limiting, strong passwords, MFA, SSH keys only, alerts on failed logins.  [These are the 'defenses' feature.]

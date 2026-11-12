@@ -1,0 +1,5 @@
+Which is FALSE?  (A) Web delivery scripts let you build custom phishing  (B) Phishing is a common first way in  (C) Modules build phishing docs for Microsoft Office, LibreOffice and OpenOffice  (D) Microsoft's mitigations can't be beaten, so Office phishing is dead	Microsoft's mitigations can't be beaten, so Office phishing is dead  [Office suites have had bugs that evade the mitigations, and Metasploit has modules for them.]
+What's special about a malicious .hta file?	On older systems, just visiting the site is enough - no opening a file.
+Unprivileged session on a Windows desktop - what can you still get?	Phish the logged-on user for their domain or local password.  [phish_windows_credentials - it keeps re-asking until the password is real.]
+What is web delivery?	A one-line command you host; when it runs on the target it pulls your payload into memory.
+How does Microsoft fight phishing docs?	Protected View and blocking macros in files from the internet, so the user has to click Enable Content.

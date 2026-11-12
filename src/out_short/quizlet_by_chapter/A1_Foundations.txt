@@ -1,0 +1,5 @@
+Which one is FALSE?  (A) Attackers skip misconfigurations and only chase CVEs  (B) Kill Chain and MITRE ATT&CK give attacks a structure  (C) Labs are built with virtualization so you get hands-on time  (D) CVE names the bug, CVSS scores how bad it is	Attackers skip misconfigurations and only chase CVEs  [Misconfigs are at least as important as CVEs, and attackers often PREFER them (no exploit needed, no alert).]
+CVE vs CVSS?	CVE = the bug's name. CVSS = the bug's score (0-10).  [Hook: NamE vs ScorE.]
+Cyber Kill Chain, 7 steps?	Recon, Weaponize, Deliver, Exploit, Install, C2, Actions.  [Hook: Real Wizards Don't Exploit In Crowded Alleys.]
+ATT&CK: tactic vs technique?	Tactic = the goal. Technique = the trick used to get it.  [Goal vs how.]
+Two more Ch.1 takeaways?	Metasploit = a professional framework for offense. Pros keep the highest ethical standards.  [Plus: admin creds on Windows = a Meterpreter shell.]

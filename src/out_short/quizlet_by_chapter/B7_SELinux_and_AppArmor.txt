@@ -1,0 +1,6 @@
+Which comparison is right?  (A) Both always run together  (B) SELinux only logs, never blocks  (C) SELinux = labels on everything, deny by default, tuned with Booleans. AppArmor = one profile per important program. Usually only one is on  (D) AppArmor uses the 4-part context	SELinux = labels on everything, deny by default, tuned with Booleans. AppArmor = one profile per important program. Usually only one is on  [7.13 + chapter bullets.]
+The 4 parts of an SELinux context?	User, role, type, level.  [Hook: U aRe Totally Locked. Applied to users, files, processes and ports.]
+SELinux's default behavior, and what simplifies it?	Blocks anything no rule allows. Booleans are the easy on/off switches for policies.
+SELinux modes and commands?	Enforcing, permissive (log only), disabled. getenforce to check, setenforce 0/1 to switch.  [ls -Z shows contexts, restorecon fixes them.]
+AppArmor: what does it protect, and what are the 2 modes?	Critical programs, each with a profile. Modes: enforce (block) and complain (log only).  [aa-status shows them.]
+What does aa-logprof do?	Reads the denials in the log and walks you through fixing the profile.  [That's how passwd got its audit_write capability back.]

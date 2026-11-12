@@ -1,0 +1,5 @@
+Defenders check the parent process. What do attackers do?  (A) Rename the kernel  (B) Obfuscate (spoof) their parent so they look like a child of something normal  (C) Nothing - parents can't be faked  (D) Delete the process list	Obfuscate (spoof) their parent so they look like a child of something normal  [Ch7. Red flag: Word spawning PowerShell.]
+Application vs process vs thread?	An application is a program running one or more processes, and each process runs one or more threads.
+Tools for viewing and managing processes?	Command-line tools (tasklist/taskkill), Task Manager, Process Explorer, PowerShell (Get-Process).
+What are integrity levels used for?	They rank processes and objects, and they're what makes UAC work.  [Low < Medium (normal user) < High (elevated admin) < System.]
+Why learn the normal Windows processes?	So an odd one stands out - like svchost.exe whose parent isn't services.exe, or lsass.exe running from the wrong folder.  [Normal chain: System > smss > wininit > services/lsass; winlogon > userinit > explorer.]

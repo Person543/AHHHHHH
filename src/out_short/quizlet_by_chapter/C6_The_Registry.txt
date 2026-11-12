@@ -1,0 +1,5 @@
+Which is FALSE?  (A) The registry is keys, subkeys and values holding data  (B) Some keys are volatile and built while the system runs  (C) Most keys live in hive files on disk  (D) Registry keys have no permissions	Registry keys have no permissions  [6.5: keys and values are securable objects with a DACL, plus extra registry-specific permissions.]
+3 ways to work with the registry?	Registry Editor (GUI), the reg command, and PowerShell (with .NET).
+The 5 root keys?	HKLM (system), HKCU (you), HKU (all users), HKCR (file types/COM), HKCC (hardware profile).
+Where do hive files live?	System hives in C:\Windows\System32\config; your own hive is NTUSER.DAT in your profile.
+Two registry spots attackers use for persistence?	The Run / RunOnce keys and the Services key. (Plus cmd's AutoRun from Ch.1.)

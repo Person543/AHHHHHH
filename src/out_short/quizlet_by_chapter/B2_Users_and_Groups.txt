@@ -1,0 +1,6 @@
+Which tool pairing is right?  (A) adduser is low level, useradd is a Perl script  (B) usermod creates users  (C) useradd/userdel = low level; adduser/deluser = Perl scripts on Mint & Ubuntu; usermod = change a user  (D) They're all the same command	useradd/userdel = low level; adduser/deluser = Perl scripts on Mint & Ubuntu; usermod = change a user  [2.4 exactly.]
+The 4 account files?	/etc/passwd, /etc/shadow, /etc/group, /etc/gshadow.  [Hook: passwd + shadow for users, group + gshadow for groups. Hashes live in shadow.]
+3 states an account can be in?	Locked, unlocked, expired.  [Lock = '!' in front of the hash (passwd -l).]
+Expired password vs expired account?	Expired password = change it at login. Expired account = you can't log in at all.
+What is /etc/nologin?	If that file exists, nobody but root can log in - and they see its message.  [Used during maintenance.]
+What does chfn change?	The user's name/office/phone info (the GECOS field in /etc/passwd).

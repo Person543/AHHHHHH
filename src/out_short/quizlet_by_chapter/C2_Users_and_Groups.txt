@@ -1,0 +1,5 @@
+Which is FALSE?  (A) Every user and group has a SID; some well-known SIDs are the same everywhere  (B) A domain group and a local group with the same name are the same group  (C) Local account data lives in the SAM; domain account data lives in Active Directory  (D) Users and groups control access, rights and privileges	A domain group and a local group with the same name are the same group  [2.10: they're different, and being in the domain group does NOT put you in the local group.]
+Local user vs domain user?	Local = one system, stored in that system's SAM. Domain = the whole domain plus trusting domains and forests, stored in Active Directory.
+4 special Windows accounts?	Administrator, NT AUTHORITY\SYSTEM, Guest, machine accounts.  [SYSTEM = the most local power; on the network it shows up as the computer account.]
+Local group vs domain group?	Local group gives rights on one system. Domain group gives rights across the domain.
+What is a well-known SID? One example.	A SID that's identical on every Windows system. S-1-5-18 = SYSTEM; RID 500 = Administrator.

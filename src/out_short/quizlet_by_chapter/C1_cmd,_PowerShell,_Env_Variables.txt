@@ -1,0 +1,6 @@
+Which is FALSE?  (A) cmd runs commands stored in the registry when it starts  (B) cmd records its history  (C) PowerShell is the modern, extendable shell and now runs on Linux too  (D) Batch and VBScript are gone from Windows	Batch and VBScript are gone from Windows  [1.8/Ch1: the old batch scripts and VBScript still work.]
+What does cmd run at startup, and why do attackers like it?	The AutoRun value in the registry - so their command runs every time cmd opens.  [Quiet persistence inside a trusted program.]
+What can PowerShell be extended with?	.NET, and the older COM, DCOM and COM+ objects. Modules can be downloaded and added.
+PowerShell history: how many ways, plus what?	Two history methods, plus a full transcript if you turn it on.  [Session history (Get-History, gone at close) + PSReadLine file (survives reboot) + Start-Transcript.]
+Two ways to obfuscate PowerShell?	Base64-encoded commands (-EncodedCommand) and downloaded modules.
+Env variable scopes, and how you set them?	Process, User, Machine. Set with set / $env: (temporary) or setx and the GUI (permanent).

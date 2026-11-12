@@ -1,0 +1,5 @@
+Tamper protection is ON. What can an admin still do?  (A) Nothing, every setting is locked  (B) Only empty quarantine  (C) Disable Defender in the registry, still supported  (D) Add exclusions - and excluded stuff is never scanned	Add exclusions - and excluded stuff is never scanned  [7.9: this is the big one. Tamper protection locks settings, but exclusions still go in - a blind spot without turning Defender off.]
+Where do Defender's removed threats go?	Quarantine on the system - and they can be restored.
+Can you disable Defender in the registry?	Old Windows, yes. Current Windows, no - not supported anymore.
+What does this chapter NOT teach?	How to change malware to get past Defender.
+How do you manage Defender from a prompt?	MpCmdRun.exe, or PowerShell: Get-MpComputerStatus, Get/Set-MpPreference, Add-MpPreference -ExclusionPath, Start-MpScan.  [Quick scan = usual hiding spots. Full scan = every file.]

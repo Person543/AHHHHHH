@@ -1,0 +1,134 @@
+MC	[A1] Which one is FALSE?	Attackers skip misconfigurations and only chase CVEs	correct	Kill Chain and MITRE ATT&CK give attacks a structure	incorrect	Labs are built with virtualization so you get hands-on time	incorrect	CVE names the bug, CVSS scores how bad it is	incorrect
+ESS	[A1] CVE vs CVSS?	CVE = the bug's name. CVSS = the bug's score (0-10).
+ESS	[A1] Cyber Kill Chain, 7 steps?	Recon, Weaponize, Deliver, Exploit, Install, C2, Actions.
+ESS	[A1] ATT&CK: tactic vs technique?	Tactic = the goal. Technique = the trick used to get it.
+ESS	[A1] Two more Ch.1 takeaways?	Metasploit = a professional framework for offense. Pros keep the highest ethical standards.
+MC	[A2] Meterpreter migration goes which way?	From low up to SYSTEM	incorrect	Only sideways, same user	incorrect	It cannot migrate	incorrect	From a higher privileged process down to lower privileged ones	correct
+ESS	[A2] 4 things Meterpreter lets you do?	Recon the system, recon the network, mess with files, run code, change the registry.
+ESS	[A2] Where does Meterpreter live?	Inside a running process, in memory - not a file on disk. That's why file scanning misses it.
+ESS	[A2] 3 ways Meterpreter gets extended?	Run PowerShell or Python on the target, read the clipboard, use ADSI to scope out the domain.
+MC	[A3] The 7 module types?	exploit, scanner, trojan, rootkit, nop	incorrect	exploit, payload, auxiliary, post, encoders, evasion, nop	correct	recon, exploit, post, report	incorrect	payload, listener, dropper, loader, shell	incorrect
+ESS	[A3] EXAM: Staged vs stageless payload - what's the difference?	Staged = tiny stub lands first, then downloads the rest. Stageless = the whole thing ships at once.
+ESS	[A3] EXAM: When do you pick each one?	Staged when space is tiny (small buffer) - it's small. Stageless when the network is shaky or you only get one connection - it needs nothing else.
+ESS	[A3] Bind vs reverse payload - which beats a firewall?	Reverse: the target calls out to you (LHOST/LPORT). Bind: the target listens and you call in. Reverse wins, since outbound is usually allowed.
+ESS	[A3] What are handlers and jobs?	A handler catches the callback. Run it as a job (exploit -j) so it sits in the background. Keylogging can run as a job too.
+ESS	[A3] 3 ways Metasploit is customized?	It logs your commands, saves results in its database, and can be scripted.
+MC	[A4] Which is FALSE?	Linux is faster to brute force than Windows, and SSH beats SMB	correct	Metasploit brute forces SMB and SSH	incorrect	The 4 features are userlist, wordlist, time, defenses	incorrect	Kali ships password lists and you can build your own	incorrect
+ESS	[A4] 4 features of a brute force attack?	Userlist, wordlist, time it takes, defenses in the way.
+ESS	[A4] Shells on a Linux target?	You can get a plain Linux shell or Meterpreter. Upgrade the plain one with sessions -u.
+ESS	[A4] 2 non-Metasploit brute force tools?	NetExec and CrackMapExec. You can also write your own.
+ESS	[A4] Where do wordlists come from?	Kali's built-in lists (rockyou.txt) or ones you generate yourself (crunch, cewl).
+ESS	[A4] What stops a brute force attack?	Lockout, rate limiting, strong passwords, MFA, SSH keys only, alerts on failed logins.
+MC	[A5] Which is FALSE?	Web delivery scripts let you build custom phishing	incorrect	Phishing is a common first way in	incorrect	Modules build phishing docs for Microsoft Office, LibreOffice and OpenOffice	incorrect	Microsoft's mitigations can't be beaten, so Office phishing is dead	correct
+ESS	[A5] What's special about a malicious .hta file?	On older systems, just visiting the site is enough - no opening a file.
+ESS	[A5] Unprivileged session on a Windows desktop - what can you still get?	Phish the logged-on user for their domain or local password.
+ESS	[A5] What is web delivery?	A one-line command you host; when it runs on the target it pulls your payload into memory.
+ESS	[A5] How does Microsoft fight phishing docs?	Protected View and blocking macros in files from the internet, so the user has to click Enable Content.
+MC	[A6] Which is FALSE?	It can spit out source code you compile yourself	incorrect	Encoding the payload reliably beats modern antivirus	correct	msfvenom makes stand-alone malware in many formats	incorrect	It can hide malware in a real Windows program and keep that program working	incorrect
+ESS	[A6] msfvenom flags: -p, -f, -o, -x, -k?	-p payload, -f format, -o output file, -x real program to hide in, -k keep that program working.
+ESS	[A6] Static vs dynamic analysis?	Static = look at the file without running it. Dynamic = run it and watch.
+ESS	[A6] What decides if your malware runs on the target?	The target's antivirus. Windows ships with Microsoft Defender.
+MC	[A7] Tamper protection is ON. What can an admin still do?	Nothing, every setting is locked	incorrect	Only empty quarantine	incorrect	Disable Defender in the registry, still supported	incorrect	Add exclusions - and excluded stuff is never scanned	correct
+ESS	[A7] Where do Defender's removed threats go?	Quarantine on the system - and they can be restored.
+ESS	[A7] Can you disable Defender in the registry?	Old Windows, yes. Current Windows, no - not supported anymore.
+ESS	[A7] What does this chapter NOT teach?	How to change malware to get past Defender.
+ESS	[A7] How do you manage Defender from a prompt?	MpCmdRun.exe, or PowerShell: Get-MpComputerStatus, Get/Set-MpPreference, Add-MpPreference -ExclusionPath, Start-MpScan.
+MC	[B1] Which is FALSE?	Bash can't use the network, so attackers ignore it	correct	You reach Linux through terminals and pseudoterminals running shells	incorrect	Bash keeps state in options, variables and environment variables	incorrect	A shell acts differently based on how it's configured and started	incorrect
+ESS	[B1] Which env variable is the security one, and why?	PATH. A writable folder early in PATH lets someone swap in a fake command.
+ESS	[B1] Who wants Bash history, who doesn't?	Admins want it recorded. Attackers make sure it isn't.
+ESS	[B1] Login vs non-login shell - why care?	They read different files, so the shell behaves differently. Login: /etc/profile + ~/.bash_profile. Non-login: ~/.bashrc.
+ESS	[B1] Two Bash conveniences from 1.7?	Aliases (shortcuts for commands) and jobs (several tasks in one session).
+MC	[B2] Which tool pairing is right?	adduser is low level, useradd is a Perl script	incorrect	usermod creates users	incorrect	useradd/userdel = low level; adduser/deluser = Perl scripts on Mint & Ubuntu; usermod = change a user	correct	They're all the same command	incorrect
+ESS	[B2] The 4 account files?	/etc/passwd, /etc/shadow, /etc/group, /etc/gshadow.
+ESS	[B2] 3 states an account can be in?	Locked, unlocked, expired.
+ESS	[B2] Expired password vs expired account?	Expired password = change it at login. Expired account = you can't log in at all.
+ESS	[B2] What is /etc/nologin?	If that file exists, nobody but root can log in - and they see its message.
+ESS	[B2] What does chfn change?	The user's name/office/phone info (the GECOS field in /etc/passwd).
+MC	[B3] Which is FALSE?	You can hash a password you already know and compare	incorrect	John reverses the hash to get the password back	correct	John the Ripper guesses over and over	incorrect	Hashes for local users sit in /etc/shadow	incorrect
+ESS	[B3] What is PAM, and who can change it?	Pluggable Authentication Modules - how Linux authenticates you. Admins configure it, and attackers with enough privilege can too.
+ESS	[B3] How does pam_exec.so get abused?	It runs any program during login, so an attacker gets a shell on every SSH attempt - even failed ones.
+ESS	[B3] What does pam_pwhistory.so do?	Stops people reusing old passwords.
+ESS	[B3] Read a shadow hash: $6$ vs $1$ vs $y$?	$1$ = MD5, $5$ = SHA-256, $6$ = SHA-512, $y$ = yescrypt. A '!' or '*' means no password login.
+ESS	[B3] Why does a salt matter?	Same password, different hash on every account - so precomputed tables are useless.
+MC	[B4] Which definition is wrong?	Polkit = command-line only, no GUI role	correct	sudo = run a command as someone else, set up by admins	incorrect	su = become another user	incorrect	runuser = admin runs a command as another user	incorrect
+ESS	[B4] The 3 login record systems?	utmp (login & ssh), lastlog (PAM), systemd.
+ESS	[B4] Which tool reads which?	utmp: who, w, last. lastlog file: lastlog. systemd: loginctl.
+ESS	[B4] Why does having 3 records help defenders?	Different programs write them, so wiping one still leaves the login in the others.
+ESS	[B4] Where is sudo configured, and what edits it?	/etc/sudoers, edited with visudo (it checks your syntax first).
+MC	[B5] Why do attackers rename their process?	To use less memory	incorrect	Renaming raises privileges	incorrect	systemd requires it	incorrect	Because defenders hunt by name - but /proc/<pid>/exe still shows the real file	correct
+ESS	[B5] 5 process tools?	ps, pidof, pgrep, pstree, top.
+ESS	[B5] How do you talk to a running process?	Send it a signal.
+ESS	[B5] What's in /proc?	A folder per running process with its details - cmdline, exe, environ, fd.
+ESS	[B5] Who manages Linux startup, and who else uses it?	systemd (PID 1). Admins run services with it; attackers plant their own unit or timer for persistence.
+MC	[B6] Which is FALSE?	Deleting the original always breaks a hard link	correct	A symlink just stores a path, so it breaks if the target goes away	incorrect	Files map to inodes on devices	incorrect	A hard link is a second name for the same inode	incorrect
+ESS	[B6] Hard link vs symlink?	Hard = same inode, same file system, files only. Soft = a path, can cross file systems and point at folders.
+ESS	[B6] SUID, SGID, sticky bit?	SUID = runs as the file's owner. SGID = runs as the group. Sticky = in a shared folder, only the owner can delete their file (/tmp).
+ESS	[B6] Basic permissions and the extras?	rwx for user, group, world. Extras: immutable (chattr +i) and ACLs (getfacl/setfacl).
+ESS	[B6] What does lsof show?	Open files and network sockets.
+ESS	[B6] Lost the root password - how does mounting save you?	Boot rescue media, mount the disk, chroot in, reset the password. Same trick reads a Windows disk.
+ESS	[B6] Why does the standard directory layout matter?	Every distro puts things in the same place: /etc config, /var logs, /home users, /usr software, /proc processes.
+MC	[B7] Which comparison is right?	Both always run together	incorrect	SELinux only logs, never blocks	incorrect	SELinux = labels on everything, deny by default, tuned with Booleans. AppArmor = one profile per important program. Usually only one is on	correct	AppArmor uses the 4-part context	incorrect
+ESS	[B7] The 4 parts of an SELinux context?	User, role, type, level.
+ESS	[B7] SELinux's default behavior, and what simplifies it?	Blocks anything no rule allows. Booleans are the easy on/off switches for policies.
+ESS	[B7] SELinux modes and commands?	Enforcing, permissive (log only), disabled. getenforce to check, setenforce 0/1 to switch.
+ESS	[B7] AppArmor: what does it protect, and what are the 2 modes?	Critical programs, each with a profile. Modes: enforce (block) and complain (log only).
+ESS	[B7] What does aa-logprof do?	Reads the denials in the log and walks you through fixing the profile.
+MC	[B8] Which mapping is right?	apt = SUSE, zypper = Ubuntu	incorrect	Everything uses apt	incorrect	yum = Ubuntu, apt = Rocky	incorrect	apt = Debian/Ubuntu/Mint, dnf & yum = Red Hat/Rocky/CentOS, zypper = SUSE	correct
+ESS	[B8] Where does software come from, and what must admins check?	Repositories - and that they're valid (signed with trusted GPG keys).
+ESS	[B8] What are Snap and Flatpak?	Ways to ship a program with its dependencies bundled in.
+ESS	[B8] What can admins verify about installed software?	Its hashes - rpm -V, debsums, sha256sum.
+MC	[C1] Which is FALSE?	cmd runs commands stored in the registry when it starts	incorrect	cmd records its history	incorrect	PowerShell is the modern, extendable shell and now runs on Linux too	incorrect	Batch and VBScript are gone from Windows	correct
+ESS	[C1] What does cmd run at startup, and why do attackers like it?	The AutoRun value in the registry - so their command runs every time cmd opens.
+ESS	[C1] What can PowerShell be extended with?	.NET, and the older COM, DCOM and COM+ objects. Modules can be downloaded and added.
+ESS	[C1] PowerShell history: how many ways, plus what?	Two history methods, plus a full transcript if you turn it on.
+ESS	[C1] Two ways to obfuscate PowerShell?	Base64-encoded commands (-EncodedCommand) and downloaded modules.
+ESS	[C1] Env variable scopes, and how you set them?	Process, User, Machine. Set with set / $env: (temporary) or setx and the GUI (permanent).
+MC	[C2] Which is FALSE?	Every user and group has a SID; some well-known SIDs are the same everywhere	incorrect	A domain group and a local group with the same name are the same group	correct	Local account data lives in the SAM; domain account data lives in Active Directory	incorrect	Users and groups control access, rights and privileges	incorrect
+ESS	[C2] Local user vs domain user?	Local = one system, stored in that system's SAM. Domain = the whole domain plus trusting domains and forests, stored in Active Directory.
+ESS	[C2] 4 special Windows accounts?	Administrator, NT AUTHORITY\SYSTEM, Guest, machine accounts.
+ESS	[C2] Local group vs domain group?	Local group gives rights on one system. Domain group gives rights across the domain.
+ESS	[C2] What is a well-known SID? One example.	A SID that's identical on every Windows system. S-1-5-18 = SYSTEM; RID 500 = Administrator.
+MC	[C3] Where are Windows password hashes, and in what format?	Plaintext in the registry	incorrect	NTLM hashes in the local SAM and in ntds.dit on domain controllers	correct	SHA-512 in /etc/shadow	incorrect	bcrypt in HKCU	incorrect
+ESS	[C3] You log on to Windows - what do you get?	A login ID and one or more access tokens.
+ESS	[C3] What does UAC do, and what controls it?	Lets you use a privileged token when you need it. Controlled by registry policies, set by group policy or local security policy.
+ESS	[C3] Hashes are protected from SYSTEM - so how do attackers get them?	Windows tools run from an Administrator or Backup Operator account.
+ESS	[C3] Two things to do with a stolen hash?	Crack it (John the Ripper) or pass-the-hash - use the hash itself instead of the password.
+ESS	[C3] Privileges and rights - what are they for?	Fine-grained control over what a user can do.
+ESS	[C3] Finding who's logged on - what's the catch?	There are several ways (query user, psloggedon, WMI, event 4624) but every one of them has limitations.
+MC	[C4] Why do attackers ship payloads inside .iso or .vhd files?	Windows auto-trusts them	incorrect	Those containers avoid the Mark of the Web, and marked files get extra scrutiny	correct	They can't be scanned	incorrect	They download faster	incorrect
+ESS	[C4] What is the Mark of the Web stored in?	An NTFS alternate data stream - one file holding more than one stream.
+ESS	[C4] Two ways to name a Windows file?	The full case-insensitive name, or the old 8.3 short name (PROGRA~1).
+ESS	[C4] Hard link vs junction vs symlink in Windows?	Hard link = between files. Junction = between directories. Symlink = admin-made, can point at relative or network paths.
+ESS	[C4] Two special Windows file locations?	The hidden desktop.ini in each folder, and C:\Users\Public.
+ESS	[C4] What manages Windows files?	File Explorer, command-line tools and PowerShell.
+MC	[C5] What are the 4 parts of a security descriptor?	Owner, group, world, other	incorrect	User, role, type, level	incorrect	Read, write, execute, deny	incorrect	Owner SID + primary group, DACL, SACL, flags	correct
+ESS	[C5] DACL vs SACL?	DACL = who gets in (access). SACL = what gets logged (auditing).
+ESS	[C5] Which objects have a security descriptor?	Securable objects: files, directories, registry items, processes.
+ESS	[C5] Tools for viewing and setting permissions?	PowerShell (Get-Acl/Set-Acl) and icacls. Sysinternals AccessChk and AccessEnum to look around. File Explorer works but its interface has subtle issues.
+ESS	[C5] Windows protects some files even from SYSTEM. Who can still change them, and what attack uses that?	Admins, or anyone with SeTakeOwnershipPrivilege or SeRestorePrivilege - they take ownership first. That's the Sticky Keys attack.
+ESS	[C5] What defends against that?	Windows Resource Protection.
+MC	[C6] Which is FALSE?	The registry is keys, subkeys and values holding data	incorrect	Some keys are volatile and built while the system runs	incorrect	Most keys live in hive files on disk	incorrect	Registry keys have no permissions	correct
+ESS	[C6] 3 ways to work with the registry?	Registry Editor (GUI), the reg command, and PowerShell (with .NET).
+ESS	[C6] The 5 root keys?	HKLM (system), HKCU (you), HKU (all users), HKCR (file types/COM), HKCC (hardware profile).
+ESS	[C6] Where do hive files live?	System hives in C:\Windows\System32\config; your own hive is NTUSER.DAT in your profile.
+ESS	[C6] Two registry spots attackers use for persistence?	The Run / RunOnce keys and the Services key. (Plus cmd's AutoRun from Ch.1.)
+MC	[C7] Defenders check the parent process. What do attackers do?	Rename the kernel	incorrect	Obfuscate (spoof) their parent so they look like a child of something normal	correct	Nothing - parents can't be faked	incorrect	Delete the process list	incorrect
+ESS	[C7] Application vs process vs thread?	An application is a program running one or more processes, and each process runs one or more threads.
+ESS	[C7] Tools for viewing and managing processes?	Command-line tools (tasklist/taskkill), Task Manager, Process Explorer, PowerShell (Get-Process).
+ESS	[C7] What are integrity levels used for?	They rank processes and objects, and they're what makes UAC work.
+ESS	[C7] Why learn the normal Windows processes?	So an odd one stands out - like svchost.exe whose parent isn't services.exe, or lsass.exe running from the wrong folder.
+MC	[C8] What is a Windows service?	A driver only	incorrect	A program you double-click	incorrect	A scheduled task	incorrect	A program built to run in the background without a user launching it	correct
+ESS	[C8] How does a service get controlled?	The service talks to a service control program, and you send your commands to that control program.
+ESS	[C8] Tools that manage services?	GUI tools (services.msc), sc, net, PsService (Sysinternals), and PowerShell.
+ESS	[C8] Service start types and accounts?	Automatic, Manual, Disabled. Accounts: LocalSystem (most power), NetworkService, LocalService.
+ESS	[C8] Two service misconfigs attackers abuse?	Unquoted paths with spaces, and weak permissions letting you swap the binary or repoint it.
+ESS	[X] Password hashes: Linux vs Windows?	Linux: /etc/shadow. Windows: NTLM in the SAM, and ntds.dit for the domain.
+ESS	[X] Identifying users: Linux vs Windows?	Linux: UID numbers (0 = root). Windows: SIDs (RID 500 = Administrator).
+ESS	[X] Permissions: Linux vs Windows?	Linux: rwx for user/group/world, plus SUID/SGID/sticky and ACLs. Windows: a security descriptor - owner, group, DACL, SACL, flags.
+ESS	[X] Getting elevated: Linux vs Windows?	Linux: sudo, su, runuser, Polkit for the GUI. Windows: UAC elevating your token, or runas.
+ESS	[X] Extra lockdown layer: Linux vs Windows?	Linux: SELinux or AppArmor. Windows: integrity levels, which drive UAC.
+ESS	[X] Background programs: Linux vs Windows?	Linux: systemd units. Windows: services under the Service Control Manager. Both are used for persistence.
+ESS	[X] Login records: Linux vs Windows?	Linux: utmp, lastlog, systemd. Windows: Security event log (4624), query user, psloggedon - all with limits.
+ESS	[X] Hiding history: Linux vs Windows?	Linux: unset HISTFILE, delete ~/.bash_history. Windows: cmd history dies with the session; PowerShell's PSReadLine file can be deleted, and Base64 hides the command's content.
+ESS	[X] Links: Linux vs Windows?	Linux: hard links and symlinks. Windows: shortcuts, hard links (files), junctions (folders), symlinks (admin only).
+ESS	[X] Put the whole attack in Kill Chain order.	Build the payload (msfvenom) > deliver it (phishing, or brute force your way in) > it runs and your handler catches it > Meterpreter session > migrate, recon, keylog, add an AV exclusion to stay.
