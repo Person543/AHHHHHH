@@ -1,0 +1,354 @@
+[
+ {
+  "code": "SA",
+  "name": "Metasploit & Meterpreter - Scenarios (Ch.1-7)",
+  "book": "Metasploit & Meterpreter",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "A scanner reports a server has CVE-2024-1234 with a CVSS of 9.8, and a second server with no CVEs but admins log in over plain telnet with a shared password. Which do you worry about, and why?",
+    "options": [
+     "Both - the misconfigured telnet box is at least as dangerous, and attackers often prefer misconfigs since they need no exploit and raise no alert",
+     "Only the CVE box - a high CVSS always wins",
+     "Only the telnet box - CVEs are never exploited",
+     "Neither - no CVE means no risk"
+    ],
+    "answer": 0,
+    "exp": "Ch.1: misconfigurations are at least as important as CVEs and are often preferred. CVE = the bug's name, CVSS = its 0-10 score."
+   },
+   {
+    "type": "mc",
+    "q": "You have valid administrator credentials for a fully patched, properly configured Windows box. Can Metasploit still get you in?",
+    "options": [
+     "No - patching blocks all Metasploit access",
+     "Yes - known admin creds let Metasploit give you a Meterpreter shell even on a hardened box",
+     "Only if there's an unpatched CVE",
+     "Only over the physical console"
+    ],
+    "answer": 1,
+    "exp": "Ch.1: credentials beat configuration. This is the whole setup for the book."
+   },
+   {
+    "type": "mc",
+    "q": "You land a Meterpreter session but 'getuid' shows a low-privileged user. What's true about what you can do and where you can go?",
+    "options": [
+     "What you can see depends on your process's privileges, and you can migrate from a higher-privileged process down to lower ones",
+     "Meterpreter can't do recon until you're admin",
+     "You can migrate from low privilege up to SYSTEM for free",
+     "You automatically have SYSTEM"
+    ],
+    "answer": 0,
+    "exp": "Ch.2: data available depends on the host process's privileges; migration goes high->low. Meterpreter lives in a process in memory, which is why file scanning misses it."
+   },
+   {
+    "type": "sa",
+    "q": "Scenario: your lure is a tiny buffer overflow with almost no room for code, and later you phish a laptop on flaky hotel wifi that may drop after one connection. Which payload type for each, and why?",
+    "answer": "Tiny space -> STAGED (small stub downloads the rest). Flaky one-shot network -> STAGELESS (whole payload ships at once, needs no second connection).",
+    "exp": "Ch.3 exam favorite. Name tell: slash = staged (meterpreter/reverse_tcp), underscore = stageless (meterpreter_reverse_tcp)."
+   },
+   {
+    "type": "mc",
+    "q": "Your payload needs to call home through a corporate firewall that blocks inbound connections. Bind or reverse?",
+    "options": [
+     "Either works equally",
+     "Neither works through a firewall",
+     "Reverse - the target connects out to you (LHOST/LPORT), and outbound is usually allowed",
+     "Bind - the target listens and you connect in"
+    ],
+    "answer": 2,
+    "exp": "Ch.3: reverse beats firewalls/NAT. A handler catches the callback; run it as a job (exploit -j) in the background."
+   },
+   {
+    "type": "sa",
+    "q": "You need to brute force one service and have limited time. The book says which targets/services are faster, and what 4 things define the attack?",
+    "answer": "Windows is faster than Linux, and SMB is faster than SSH (Windows Wins, SMB is Speedy). The 4 features: userlist, wordlist, time, defenses (Users Want Time Delays).",
+    "exp": "Ch.4. Modules: smb_login and ssh_login. Defenses = lockout, rate limiting, MFA, strong passwords."
+   },
+   {
+    "type": "mc",
+    "q": "You phish a user and they type the WRONG password into your fake Windows prompt. What happens with phish_windows_credentials?",
+    "options": [
+     "It accepts anything and logs the wrong password",
+     "It locks the account",
+     "It keeps re-prompting until the credentials actually validate against the system",
+     "It crashes"
+    ],
+    "answer": 2,
+    "exp": "Ch.5: that re-prompt is why it works. You can run it from an UNPRIVILEGED session to steal the logged-on user's domain/local creds."
+   },
+   {
+    "type": "mc",
+    "q": "You generated a payload and ran it through Metasploit encoders several times, but Defender still catches it. Why?",
+    "options": [
+     "The payload was corrupted",
+     "You didn't encode enough times",
+     "Encoding only works on Linux",
+     "Encoders dodge bad characters, not AV - modern AV watches behavior, memory and the cloud"
+    ],
+    "answer": 3,
+    "exp": "Ch.6/7: encoding != evasion. Whether malware runs depends on the target's AV; Windows ships Defender."
+   },
+   {
+    "type": "sa",
+    "q": "You want to trojanize a real program so the victim sees normal behavior. Which tool and flags, and what does static vs dynamic analysis mean for the defender?",
+    "answer": "msfvenom with -x <real program> -k (keep it working), plus -p payload, -f format, -o outfile. Static = examine without running (strings, hashes, Ghidra). Dynamic = run and watch (strace, gdb).",
+    "exp": "Ch.6."
+   },
+   {
+    "type": "mc",
+    "q": "You're admin on a box with Defender tamper protection ON. You can't disable Defender - what's your move for a lasting blind spot?",
+    "options": [
+     "Disable Defender in the registry (still supported)",
+     "Add an exclusion - excluded paths/processes are never scanned, and admins can still add them even with tamper protection on",
+     "Empty the quarantine",
+     "Nothing - tamper protection stops everything"
+    ],
+    "answer": 1,
+    "exp": "Ch.7: this is the key nuance. Quarantined threats can also be restored; registry-disable is no longer supported."
+   }
+  ]
+ },
+ {
+  "code": "SB",
+  "name": "Linux for Cyber Ops - Scenarios (Ch.1-8)",
+  "book": "Linux",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "You get a Linux shell and want your commands left out of history, and you notice '.' is early in the user's PATH. What do these two facts give you?",
+    "options": [
+     "Nothing useful",
+     "Only history matters, PATH is harmless",
+     "Only PATH matters, history can't be cleared",
+     "Hide tracks (unset HISTFILE / HISTSIZE=0 / set +o history) and hijack a command by dropping a fake binary that '.' in PATH runs first"
+    ],
+    "answer": 3,
+    "exp": "Ch.1: PATH is THE security env var; attackers also suppress bash history. A shell also behaves differently by how it's started (login vs not)."
+   },
+   {
+    "type": "sa",
+    "q": "You find a second account in /etc/passwd with UID 0, and another account whose hash in /etc/shadow starts with '!'. What does each mean?",
+    "answer": "UID 0 = root, so that second account is a hidden root backdoor (Linux authorizes by UID, not name). '!' in front of the hash = the account is locked.",
+    "exp": "Ch.2. Account files: passwd, shadow, group, gshadow. Expired password = change at login; expired account = can't log in at all."
+   },
+   {
+    "type": "mc",
+    "q": "You crack a hash from /etc/shadow that starts with $6$. What is it, and how did John get the password?",
+    "options": [
+     "MD5, reversed mathematically",
+     "Plaintext already",
+     "bcrypt, decrypted with the salt",
+     "SHA-512, found by repeated guessing (hash a guess, compare) - hashes are one-way, not reversible"
+    ],
+    "answer": 3,
+    "exp": "Ch.3: $1$=MD5, $5$=SHA-256, $6$=SHA-512, $y$=yescrypt. Salt = same password hashes differently per account, so rainbow tables fail."
+   },
+   {
+    "type": "mc",
+    "q": "You can edit the sshd PAM stack. How do you get a shell on every SSH login attempt, even failed ones?",
+    "options": [
+     "Change the login shell",
+     "Add pam_exec.so - it runs your program during authentication regardless of success",
+     "Delete /etc/shadow",
+     "Add pam_pwhistory.so"
+    ],
+    "answer": 1,
+    "exp": "Ch.3: pam_exec.so is the abuse; admins and attackers with privilege can edit PAM (/etc/pam.d)."
+   },
+   {
+    "type": "sa",
+    "q": "An attacker logged in via SSH and wiped one login record, but you still caught the login. Name the 3 record systems and why wiping one isn't enough.",
+    "answer": "utmp (who/w/last), lastlog (pam_lastlog.so), systemd (loginctl). Different programs write each, so scrubbing one leaves the login in the others.",
+    "exp": "Ch.4 (U-L-S). sudo is configured in /etc/sudoers via visudo; Polkit = elevation for the GUI."
+   },
+   {
+    "type": "mc",
+    "q": "You see a process named 'nginx' using 100% CPU but the box doesn't run a web server. How do you confirm it's really an attacker's renamed binary?",
+    "options": [
+     "Check /proc/<pid>/exe - it points at the real file on disk no matter what the process is named",
+     "Reboot and see if it returns",
+     "You can't - the name is authoritative",
+     "Check its PID number"
+    ],
+    "answer": 0,
+    "exp": "Ch.5: defenders hunt by name, so attackers rename; /proc/<pid>/exe defeats it. Talk to a process with signals: SIGKILL(9) can't be caught, SIGTERM(15) can."
+   },
+   {
+    "type": "mc",
+    "q": "An attacker wants persistence that survives reboot on a systemd box. Where do they put it, and where do you look?",
+    "options": [
+     "Nowhere - systemd can't persist malware",
+     "A malicious .service unit or timer in /etc/systemd/system; check systemctl list-unit-files --state=enabled and list-timers",
+     "In /tmp only",
+     "In bash history"
+    ],
+    "answer": 1,
+    "exp": "Ch.5: systemd is PID 1; admins and attackers both use it. "
+   },
+   {
+    "type": "sa",
+    "q": "You locked yourself out of a Linux box (lost root password) and separately find a SUID-root binary you don't recognize. What can you do with each?",
+    "answer": "Lost password: boot rescue/install media, mount the disk, chroot in, reset with passwd. Unknown SUID-root (find / -perm -4000): runs as root, so it's a privilege-escalation path or a planted backdoor shell.",
+    "exp": "Ch.6. SUID=run as owner, SGID=as group, sticky=only owner deletes (/tmp). Hard link=same inode; symlink=a path that breaks if target goes."
+   },
+   {
+    "type": "mc",
+    "q": "A Red Hat box runs SELinux; an Ubuntu box runs AppArmor. One-line difference, and can both run at once?",
+    "options": [
+     "Both only log, never block",
+     "SELinux = labels on everything, deny-by-default, tuned with Booleans; AppArmor = one profile per critical program; generally only one is active",
+     "They're identical and always run together",
+     "AppArmor labels everything; SELinux uses profiles"
+    ],
+    "answer": 1,
+    "exp": "Ch.7: SELinux context = user:role:type:level (U aRe Totally Locked). Modes: enforcing/permissive/disabled; aa-logprof fixes an AppArmor profile from denials."
+   },
+   {
+    "type": "mc",
+    "q": "You're told to make sure software on a Linux fleet is trustworthy. What two things matter most?",
+    "options": [
+     "Nothing after install",
+     "Only that apt is used",
+     "Only the file names",
+     "Repositories are valid (signed with trusted GPG keys) and installed files still match their package hashes (rpm -V, debsums)"
+    ],
+    "answer": 3,
+    "exp": "Ch.8: apt=Debian/Ubuntu/Mint, dnf/yum=Red Hat/Rocky, zypper=SUSE. Snap/Flatpak bundle dependencies (but publisher patches them, not the distro)."
+   }
+  ]
+ },
+ {
+  "code": "SC",
+  "name": "Windows for Cyber Ops - Scenarios (Ch.1-8)",
+  "book": "Windows",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "In a log you see powershell.exe launched with -EncodedCommand and a long Base64 string. What is happening, and why do attackers do it?",
+    "options": [
+     "A normal Windows update",
+     "An obfuscated PowerShell command - Base64 hides keywords from simple command-line matching",
+     "A corrupted command",
+     "PowerShell being disabled"
+    ],
+    "answer": 1,
+    "exp": "Ch.1: Base64 and downloaded modules are the two obfuscation methods. PowerShell is the modern shell (runs on Linux too); cmd runs a registry AutoRun at startup and keeps history."
+   },
+   {
+    "type": "mc",
+    "q": "You get cmd.exe to open and your command runs every time - you added a value in the registry. Which, and why do attackers like it?",
+    "options": [
+     "An environment variable",
+     "The Command Processor AutoRun value - quiet user-level persistence inside a trusted program",
+     "The Run key only works for PowerShell",
+     "A scheduled task"
+    ],
+    "answer": 1,
+    "exp": "Ch.1: cmd executes AutoRun from the registry on startup."
+   },
+   {
+    "type": "mc",
+    "q": "A domain group and a local group have the same name. A user is in the domain group - are they in the local group too?",
+    "options": [
+     "Yes, same name means same group",
+     "Only on domain controllers",
+     "No - different groups with different SIDs; domain membership doesn't grant local membership",
+     "Only if they share a RID"
+    ],
+    "answer": 2,
+    "exp": "Ch.2: SIDs identify users/groups; well-known ones (S-1-5-18=SYSTEM, RID 500=Administrator) are the same everywhere. Local data=SAM, domain data=Active Directory."
+   },
+   {
+    "type": "sa",
+    "q": "You dumped NTLM hashes but can't crack them in time. How do you still use them, and where did they come from?",
+    "answer": "Pass-the-hash: use the hash itself to authenticate instead of the password. They live in the SAM (local) and ntds.dit (domain); protected so even SYSTEM can't read them directly - you pull them as Administrator or Backup Operator.",
+    "exp": "Ch.3. Logon gives a login ID + access tokens; UAC lets you use a privileged token, controlled by registry/group policy."
+   },
+   {
+    "type": "mc",
+    "q": "You download a flagged payload but want it to dodge the extra scrutiny Windows gives internet files. What do you do?",
+    "options": [
+     "Zip it with a password only",
+     "Nothing can avoid it",
+     "Rename the .exe",
+     "Ship it inside a .iso or .vhd - those containers avoid the Mark of the Web"
+    ],
+    "answer": 3,
+    "exp": "Ch.4: MOTW is stored in an NTFS alternate data stream (Zone.Identifier); copying to FAT32 also strips it. Windows files also have 8.3 short names and several timestamps."
+   },
+   {
+    "type": "sa",
+    "q": "At a locked Windows login screen you press Shift 5 times and get a SYSTEM command prompt. What attack is this, what made it possible, and what defends against it?",
+    "answer": "Sticky Keys attack: you took ownership of sethc.exe (via SeTakeOwnershipPrivilege/SeRestorePrivilege) and replaced it with cmd.exe. Windows Resource Protection defends against it.",
+    "exp": "Ch.5. Security descriptor = Owner, Group, DACL, SACL, Flags (Only Good Dogs Sit First). DACL=access (Door), SACL=logging (Security camera)."
+   },
+   {
+    "type": "mc",
+    "q": "You want to see who can modify a service's files or a registry key. Which tools show the security properties/permissions?",
+    "options": [
+     "Only Task Manager",
+     "icacls and Get-Acl, plus Sysinternals AccessChk/AccessEnum",
+     "Only File Explorer (it's always accurate)",
+     "Only regedit"
+    ],
+    "answer": 1,
+    "exp": "Ch.5: File Explorer works but has subtle issues; SDDL = permissions as a string. Registry keys and values are securable objects with their own DACL (Ch.6)."
+   },
+   {
+    "type": "mc",
+    "q": "You see svchost.exe whose parent process is winword.exe, not services.exe. Why is that a red flag, and what trick might hide it?",
+    "options": [
+     "It's always normal",
+     "svchost has no parent",
+     "Word always launches svchost",
+     "svchost should be a child of services.exe - an odd parent signals injection/masquerade; attackers can spoof (obfuscate) a process's parent"
+    ],
+    "answer": 3,
+    "exp": "Ch.7: defenders check the parent; attackers spoof it. Integrity levels (Low<Medium<High<System) drive UAC. Know the normal process tree."
+   },
+   {
+    "type": "mc",
+    "q": "You find a service with an unquoted path 'C:\\Program Files\\My App\\svc.exe' and you can write to C:\\. How is this a privilege-escalation path?",
+    "options": [
+     "Only on domain controllers",
+     "Only if you're already SYSTEM",
+     "Windows tries C:\\Program.exe first, so your planted binary runs as the service's account at startup",
+     "It isn't exploitable"
+    ],
+    "answer": 2,
+    "exp": "Ch.8: unquoted service paths + weak permissions = escalation/persistence. Services run in the background via the Service Control Manager (sc, net, PsService, PowerShell); defined under HKLM\\SYSTEM\\CurrentControlSet\\Services. Accounts: LocalSystem > NetworkService > LocalService."
+   }
+  ]
+ },
+ {
+  "code": "SX",
+  "name": "Cross-Book - Big-Picture Scenarios",
+  "book": "Cross-Book",
+  "questions": [
+   {
+    "type": "sa",
+    "q": "Put a full attack in Cyber Kill Chain order using the book's tools: msfvenom payload, phishing email, handler/Meterpreter, AV exclusion, recon.",
+    "answer": "Recon -> Weaponize (msfvenom payload) -> Deliver (phishing) -> Exploit/Install (it runs, handler catches the callback) -> C2 (Meterpreter) -> Actions (recon, migrate, add AV exclusion to persist). Kill chain: Real Wizards Don't Exploit In Crowded Alleys.",
+    "exp": "Ties all books together. Misconfigs often beat CVEs as the way in."
+   },
+   {
+    "type": "sa",
+    "q": "You need password hashes on both a Linux and a Windows box. Where is each, and what's the one-line difference in how users are identified?",
+    "answer": "Linux: /etc/shadow. Windows: SAM (local) + ntds.dit (domain). Linux identifies users by UID numbers (0=root); Windows by SIDs (RID 500=Administrator).",
+    "exp": "Linux Ch.3 + Windows Ch.3/Ch.2."
+   },
+   {
+    "type": "sa",
+    "q": "Compare the 'extra lockdown' layer and the 'background program' persistence spot on Linux vs Windows.",
+    "answer": "Lockdown: Linux = SELinux or AppArmor; Windows = integrity levels (drive UAC). Background/persistence: Linux = systemd units/timers; Windows = services (Service Control Manager). Both used by admins and attackers.",
+    "exp": "Linux Ch.5/7 + Windows Ch.7/8."
+   },
+   {
+    "type": "sa",
+    "q": "A defender asks how an attacker hides activity on each OS. Give the history/log trick for Linux vs Windows.",
+    "answer": "Linux: clear bash history (unset HISTFILE) and know logins sit in 3 places (utmp/lastlog/systemd). Windows: cmd history dies with the session, PowerShell PSReadLine file can be deleted, and Base64 hides the command's content; logons show in event 4624 with limits.",
+    "exp": "Linux Ch.1/4 + Windows Ch.1/3."
+   }
+  ]
+ }
+]

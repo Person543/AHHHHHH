@@ -14,6 +14,17 @@ python3 build_short.py && python3 build_html_short.py   # short version -> out_s
 python3 -m http.server 8000 --directory out_short
 Then press Cyber Ops Quiz Trainer
 ```
+## New files (nothing from the old version was edited):
+- scen_a.py, scen_b.py, scen_c.py, scen_x.py - the 33 scenario questions (Metasploit, Linux, Windows, Cross-book)
+- build_scen.py - writes the Quizlet / Anki / Moodle / JSON files into out_scen/
+- build_html_scen.py - fills template.html with the questions + 10-day plan -> out_scen/Cyber_Ops_SCENARIO_Trainer.html
+- make_cheat.py - writes out_scen/Cyber_Ops_Cheat_Sheet.html
+- template.html - unchanged copy from the original code (build_html_scen.py swaps the title, "20-day" -> "10-day" and the minutes-per-day text when it builds)
+
+Run (Python 3 only, from this folder):
+    python3 build_scen.py && python3 build_html_scen.py && python3 make_cheat.py
+    python3 -m http.server 8000 --directory out_scen
+
 
 ## Question format
 ```
